@@ -31,13 +31,19 @@ void qttreewidgetLearn::displayDockWidget(){
     item->setText(0,"address");
     item->setIcon(0,QIcon("./icon/web.svg"));
     item->setCheckState(0,Qt::Unchecked);
-    
 
-    QStringList *strList=new QStringList();
-    *strList<<"C语言教程"<<"http://c.biancheng.net/c/"<<"done";
-    QTreeWidgetItem childItem(item,*strList);
+    QStringList top;
+    top<<"turtlsim" << "web" <<"status";
+    treeWidget->setHeaderLabels(top);
+    // treeWidget->addTopLevelItem(item);
+
+    QStringList strList;
+    strList<<"C"<<"http://c.biancheng.net/c/"<<"done";
+    QTreeWidgetItem *childItem=new QTreeWidgetItem(strList);
+    childItem->setCheckState(0,Qt::Unchecked);
+    item->addChild(childItem);
     
     
-    treeWidget->addTopLevelItem(item);
+    
     dockWidget->setWidget(treeWidget);
 }
