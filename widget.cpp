@@ -60,10 +60,12 @@ void Widget::layout(QWidget* w) {
 
     baudSpinbox = new QComboBox(GBox);
     baudSpinbox->resize(100, 30);
-    baudSpinbox->addItem("4800", 4800);
+    QList<qint32> baudList=QSerialPortInfo::standardBaudRates();
+    int baudListSize=baudList.size();
+    // for(int i=0;i<baudListSize;i++){
+    //     baudSpinbox->addItem(QString::number(baudList.at(i)), baudList.at(i));
+    // }
     baudSpinbox->addItem("9600", 9600);
-    baudSpinbox->addItem("19200", 19200);
-
     QLabel* stopBit = new QLabel(GBox);
     stopBit->setText("StopBits:");
     stopBit->resize(100, 30);
@@ -165,6 +167,7 @@ void Widget::sendSerialPortData(QWidget* parent) {
 void Widget::scanPort() {
     serialPort->clear();
     QList<QSerialPortInfo> serialPortList = QSerialPortInfo::availablePorts();
+
     if (serialPortList.isEmpty()) {
         serialPort->addItem(QString("Empty"));
         pilotLamp->setStyleSheet(m_red_SheetStyle);
