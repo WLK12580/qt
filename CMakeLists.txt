@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5) # CMake install : https://cmake.org/download/
-project(QNetworkLearn LANGUAGES CXX)
+project(QTcpCommit LANGUAGES CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_PREFIX_PATH "/home/wlk/Install/qt/6.6.3/gcc_64") # Qt Kit Dir
 set(CMAKE_AUTOUIC ON)
@@ -7,7 +7,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-find_package(Qt5 COMPONENTS Widgets Network  REQUIRED) # Qt COMPONENTS
+find_package(Qt5 COMPONENTS Widgets Network REQUIRED) # Qt COMPONENTS
 aux_source_directory(./src srcs)
 
 # Specify MSVC UTF-8 encoding   
