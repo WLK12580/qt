@@ -1,13 +1,12 @@
-#include "readWriteLock.h"
+#include "QNetworkLearn.h"
 
 #include <QApplication>
 #pragma comment(lib, "user32.lib")
 
 int main(int argc, char *argv[])
 {
-    qRegisterMetaType<std::queue<std::string>>("std::queue<std::string>");
     QApplication a(argc, argv);
-    readWriteLock w;
+    QNetworkLearn w;
     w.show();
     return a.exec();
 }
