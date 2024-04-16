@@ -16,6 +16,7 @@
 #include <QHostAddress>
 #include <QHostInfo>
 #include <iostream>
+#include "sub_window_1.h"
 
 class QTcpCommit : public QMainWindow {
     Q_OBJECT
@@ -62,6 +63,11 @@ private:
     QLineEdit *lidInputData=nullptr;
 
     QPlainTextEdit *plainTextEdit=nullptr;
+
+    QPushButton *changeWindow=nullptr;
+    QPushButton *closeWindow=nullptr;
+    QGroupBox *subGbx=nullptr;
+    QGridLayout *SubGLayout=nullptr;
 
 
 private:

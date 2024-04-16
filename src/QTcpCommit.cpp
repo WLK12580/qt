@@ -19,6 +19,16 @@ void QTcpCommit::connectFunc(){
     connect(actStartListen,&QAction::triggered,this,&QTcpCommit::onActStartListenTriggered);
     connect(actStopListen,&QAction::triggered,this,&QTcpCommit::onActStopListenTriggered);
     connect(tcpServer,&QTcpServer::newConnection,this,&QTcpCommit::doNewConnect);
+    connect(changeWindow,&QPushButton::clicked,this,[=]{
+        subwindow_1 *subWin=new subwindow_1(this);
+        std::cout<<"窗口切换\n";
+        this->close();
+        subWin->show();
+    });
+    connect(closeWindow,&QPushButton::clicked,[=]{
+        std::cout<<"窗口关闭\n";
+        this->close();
+    });
 }
 void QTcpCommit::initParams(){
     GBox=new QGroupBox(this);
@@ -29,6 +39,13 @@ void QTcpCommit::initParams(){
     listenStatus=new QLabel(GBox);
     socketStatus=new QLabel(GBox);
     toolBar=addToolBar("action");
+
+    subGbx=new QGroupBox(this);
+    changeWindow=new QPushButton(subGbx);
+    changeWindow->setText("changeWindow");
+    SubGLayout=new QGridLayout(subGbx);
+    closeWindow=new QPushButton(subGbx);
+    closeWindow->setText("closeWindow");
     
 
     actStartListen=new QAction(this);
@@ -51,6 +68,7 @@ void QTcpCommit::initParams(){
 
 void QTcpCommit::displayGUI(){
     GBox->setGeometry(10,60,400,500);
+    subGbx->setGeometry(450,60,300,100);
     toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon); //文字显示在图标下
     actStartListen->setText("startListen");
     actStartListen->setIcon(QIcon("./icon/start.svg"));
@@ -90,6 +108,9 @@ void QTcpCommit::displayGUI(){
     GLayout->addWidget(lidInputData,1,0,1,3);
     GLayout->addWidget(btnSendData,1,3,1,1);
     GLayout->addWidget(plainTextEdit,2,0,1,4);  
+
+    SubGLayout->addWidget(changeWindow,0,0,1,1);
+    SubGLayout->addWidget(closeWindow,0,1,1,1);
 }
 void QTcpCommit::getLocalIP(QString &retLocalIp){
     //获取本机IP
@@ -140,6 +161,7 @@ void QTcpCommit::doNewConnect(){
     connect(tcpSocket,&QTcpSocket::connected,this,&QTcpCommit::doClientConnect);
     connect(tcpSocket,&QTcpSocket::readyRead,this,&QTcpCommit::doReadDataFromClient);
     connect(tcpSocket,&QTcpSocket::disconnected,this,&QTcpCommit::doClientDisconnected);
+
 }
 
 void QTcpCommit::doClientConnect(){
